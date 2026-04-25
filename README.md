@@ -1,6 +1,7 @@
 # Sistema de Pedidos — Parcial 1 · Programación IV · UTN
 
 > 🎥 https://youtu.be/pSPrfLVmrOU
+> 🎥 https://youtu.be/ZSFGKobXCqE
 
 Aplicación fullstack para gestión de productos, categorías e ingredientes de un sistema de pedidos.
 
