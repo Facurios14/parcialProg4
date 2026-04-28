@@ -73,7 +73,7 @@ cp .env.example .env
 # Editar .env con tus credenciales de PostgreSQL
 
 # Iniciar servidor de desarrollo
-uvicorn main:app --reload
+fastapi dev main.py
 ```
 
 
