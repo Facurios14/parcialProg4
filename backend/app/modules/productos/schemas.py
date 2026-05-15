@@ -19,6 +19,7 @@ class ProductoBase(BaseModel):
     descripcion: Optional[str] = Field(default=None, max_length=500)
     precio_base: Decimal = Field(..., gt=0, decimal_places=2)
     stock_cantidad: Optional[int] = Field(default=None, ge=0)
+    imagenes_url: Optional[List[str]] = []
     disponible: bool = True
 
 
@@ -34,6 +35,7 @@ class ProductoUpdate(BaseModel):
     descripcion: Optional[str] = Field(default=None, max_length=500)
     precio_base: Optional[Decimal] = Field(default=None, gt=0, decimal_places=2)
     stock_cantidad: Optional[int] = Field(default=None, ge=0)
+    imagenes_url: Optional[List[str]] = None
     disponible: Optional[bool] = None
     categoria_ids: Optional[List[int]] = Field(default=None, min_length=1)
     ingredientes: Optional[List[IngredienteLink]] = None

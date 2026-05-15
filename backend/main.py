@@ -9,6 +9,8 @@ from app.core.database import create_db_and_tables
 from app.modules.categorias.router import router as router_categorias
 from app.modules.ingredientes.router import router as router_ingredientes
 from app.modules.productos.router import router as router_productos
+from app.modules.auth.router import router as router_auth
+from app.modules.usuarios.router import router as router_usuarios
 
 
 @asynccontextmanager
@@ -25,7 +27,7 @@ app = FastAPI(
         "**Stack:** FastAPI + SQLModel + PostgreSQL\n\n"
         "**Parcial 1 — Programación IV · UTN**"
     ),
-    version="1.0.0",
+    version="5.0.0",
     lifespan=lifespan,
     docs_url="/docs",
     redoc_url="/redoc",
@@ -44,6 +46,8 @@ app.add_middleware(
 app.include_router(router_categorias)
 app.include_router(router_ingredientes)
 app.include_router(router_productos)
+app.include_router(router_auth)
+app.include_router(router_usuarios)
 
 
 # ── Manejador de errores de validación de Pydantic ────────────────────────────

@@ -1,6 +1,7 @@
 from typing import Optional, List, TYPE_CHECKING
 from decimal import Decimal
 from datetime import datetime, timezone
+from sqlalchemy import JSON
 from sqlmodel import SQLModel, Field, Relationship, Column, DECIMAL
 
 if TYPE_CHECKING:
@@ -38,8 +39,9 @@ class Producto(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     nombre: str = Field(max_length=150, nullable=False)
     descripcion: Optional[str] = Field(default=None)
-    stock_cantidad: int = Field(sa_column=Column("stock_cantidad", nullable=False), ge=0)
+    stock_cantidad: int = Field(default=0, nullable=False, ge=0)
     precio_base: Decimal = Field(sa_column=Column(DECIMAL(10, 2), nullable=False), ge=0)
+    imagenes_url: Optional[List[str]] = Field(default=[], sa_column=Column(JSON))
     disponible: bool = Field(default=True, nullable=False)
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))

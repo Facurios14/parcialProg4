@@ -38,13 +38,20 @@ export const ModalProductos = ({
     },
     onSubmit: async ({ value }) => {
       setApiError(null);
+      
+      let finalImages = [...value.imagenes_url];
+      const pendingUrl = nuevaImagenUrl.trim();
+      if (pendingUrl && !finalImages.includes(pendingUrl)) {
+        finalImages.push(pendingUrl);
+      }
+
       const productoData: any = {
         nombre: value.nombre,
         descripcion: value.descripcion || undefined,
         precio_base: Number(value.precio_base),
         stock_cantidad: Number(value.stock_cantidad),
         disponible: value.disponible,
-        imagenes_url: value.imagenes_url.length > 0 ? value.imagenes_url : undefined,
+        imagenes_url: finalImages.length > 0 ? finalImages : undefined,
         categoria_ids: value.categoria_ids,
         ingredientes: value.ingredientes,
       };

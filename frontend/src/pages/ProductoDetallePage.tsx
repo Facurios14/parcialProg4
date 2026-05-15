@@ -36,6 +36,18 @@ export const ProductoDetallePage = () => {
 
       {/* Card */}
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm px-6 py-6 flex flex-col gap-5">
+        {/* Imagen */}
+        <div className="flex justify-center mb-4">
+          <img
+            src={producto.imagenes_url && producto.imagenes_url.length > 0 ? producto.imagenes_url[0] : `https://placehold.co/200x200?text=${encodeURIComponent(producto.nombre?.charAt(0) || "?")}`}
+            alt={producto.nombre}
+            className="w-48 h-48 object-cover rounded-xl border border-gray-200 shadow-sm"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "https://placehold.co/200x200?text=?";
+            }}
+          />
+        </div>
+
         {/* Categorías */}
         {producto.categorias && producto.categorias.length > 0 && (
           <div className="flex flex-wrap gap-2">

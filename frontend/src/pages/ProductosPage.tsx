@@ -109,17 +109,16 @@ export const ProductosPage = () => {
         header: "Imagen",
         cell: (info) => {
           const urls = info.getValue();
-          return urls && urls.length > 0 ? (
+          const imageUrl = urls && urls.length > 0 ? urls[0] : "https://placehold.co/40x40?text=?";
+          return (
             <img
-              src={urls[0]}
+              src={imageUrl}
               alt="Producto"
               className="w-10 h-10 object-cover rounded-lg border border-gray-200"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = "https://placehold.co/40x40?text=?";
               }}
             />
-          ) : (
-            <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 text-lg"></div>
           );
         },
       }),

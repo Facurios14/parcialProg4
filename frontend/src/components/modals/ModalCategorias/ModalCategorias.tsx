@@ -17,7 +17,6 @@ export const ModalCategorias = ({
   handleCreate,
   handleUpdate,
 }: Props) => {
-  const [nuevaImagenUrl, setNuevaImagenUrl] = useState("");
   const [parentSearchTerm, setParentSearchTerm] = useState("");
   const [apiError, setApiError] = useState<string | null>(null);
 
@@ -25,7 +24,6 @@ export const ModalCategorias = ({
     defaultValues: {
       nombre: categoriaActive?.nombre ?? "",
       descripcion: categoriaActive?.descripcion ?? "",
-      imagen_url: categoriaActive?.imagen_url ?? "",
       parent_id: categoriaActive?.parent_id?.toString() ?? "",
     },
     onSubmit: async ({ value }) => {
@@ -33,7 +31,6 @@ export const ModalCategorias = ({
       const categoriaData: Omit<ICategoria, "id"> = {
         nombre: value.nombre,
         descripcion: value.descripcion || undefined,
-        imagen_url: value.imagen_url || undefined,
         parent_id: value.parent_id ? Number(value.parent_id) : undefined,
       };
       try {
@@ -118,82 +115,6 @@ export const ModalCategorias = ({
               )}
             />
 
-            {/* Imagen URL */}
-            <form.Field
-              name="imagen_url"
-              children={(field) => {
-                const imagenUrl = field.state.value;
-                const agregarImagen = () => {
-                  const url = nuevaImagenUrl.trim();
-                  if (url) {
-                    field.handleChange(url);
-                    setNuevaImagenUrl("");
-                  }
-                };
-                const eliminarImagen = () => field.handleChange("");
-
-                return (
-                  <div className="flex flex-col gap-2">
-                    <label className="text-sm font-medium text-gray-600">Imagen (URL)</label>
-                    {imagenUrl && (
-                      <div className="relative w-20 h-20 group">
-                        <img
-                          src={imagenUrl}
-                          alt="Preview"
-                          className="w-20 h-20 object-cover rounded-lg border border-gray-200 shadow-sm"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = "https://placehold.co/80x80?text=?";
-                          }}
-                        />
-                        <button
-                          type="button"
-                          onClick={eliminarImagen}
-                          className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    )}
-                    {!imagenUrl && (
-                      <div className="flex flex-col gap-2">
-                        <div className="flex gap-2">
-                          <input
-                            type="url"
-                            value={nuevaImagenUrl}
-                            onChange={(e) => setNuevaImagenUrl(e.target.value)}
-                            onKeyDown={(e) => {
-                              if (e.key === "Enter") {
-                                e.preventDefault();
-                                agregarImagen();
-                              }
-                            }}
-                            placeholder="https://ejemplo.com/imagen.jpg"
-                            className="flex-1 px-3 py-2 rounded-lg border border-gray-200 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                          />
-                          <button
-                            type="button"
-                            onClick={agregarImagen}
-                            className="px-3 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-colors"
-                          >
-                            +
-                          </button>
-                        </div>
-                        {nuevaImagenUrl && (
-                          <div className="flex justify-center p-1.5 border border-dashed border-emerald-200 rounded-lg bg-emerald-50/20">
-                            <img
-                              src={nuevaImagenUrl}
-                              alt="Escribiendo..."
-                              className="max-h-20 rounded-md opacity-70 object-cover"
-                              onError={(e) => (e.currentTarget.style.display = "none")}
-                            />
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                );
-              }}
-            />
 
             {/* Categoría Padre */}
             <form.Field

@@ -3,11 +3,16 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    postgres_user: str = "postgres"
-    postgres_password: str = "14del12del2001"
-    postgres_db: str = "sistema_pedidos"
-    postgres_host: str = "localhost"
-    postgres_port: int = 5432
+
+    postgres_user: str
+    postgres_password: str
+    postgres_db: str
+    postgres_host: str
+    postgres_port: int
+
+    SECRET_KEY: str
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     @computed_field
     @property

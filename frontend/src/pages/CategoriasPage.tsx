@@ -104,21 +104,6 @@ export const CategoriasPage = () => {
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor("imagen_url", {
-        header: "Imagen",
-        cell: (info) => {
-          const url = info.getValue();
-          return url ? (
-            <img
-              src={url}
-              alt="Categoria"
-              className="w-10 h-10 object-cover rounded-lg border border-gray-100"
-            />
-          ) : (
-            <div className="w-10 h-10 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400"></div>
-          );
-        },
-      }),
       columnHelper.accessor("path", {
         header: "Nombre",
         cell: (info) => {
